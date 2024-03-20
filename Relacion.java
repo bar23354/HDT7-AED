@@ -11,7 +11,10 @@
         this.englishWord = englishWord;
         this.spanishWord = spanishWord;
     }
-
+    
+    /** 
+     * @return String
+     */
     public String getEnglishWord() {
         return englishWord;
     }

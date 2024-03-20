@@ -3,21 +3,31 @@
  * Roberto Barreda - 23354
  */
 
- public class Traductor {
-    private ArbolBinario<Relacion> dictionaryTree;
+public class Traductor {
+    private ArbolBinario<String, String> dictionaryTree;
 
-    public Traductor(ArbolBinario<Relacion> dictionaryTree) {
+    public Traductor(ArbolBinario dictionaryTree) {
         this.dictionaryTree = dictionaryTree;
     }
 
-    public String traducir(String palabra) {
-        Relacion relacion = dictionaryTree.buscar(new Relacion(palabra.toLowerCase(), ""));
-        if (relacion != null) {
-            return relacion.getSpanishWord();
-        } else {
-            return "*" + palabra + "*";
+    /** 
+     * @param texto
+     * @return String
+     */
+    public String traducirTexto(String texto) {
+        StringBuilder resultado = new StringBuilder();
+        String[] palabras = texto.split("\\s+");
+        for (String palabra : palabras) {
+            String traduccion = dictionaryTree.buscar(palabra.toLowerCase());
+            if (traduccion != null) {
+                resultado.append(traduccion).append(" ");
+            } else {
+                resultado.append("*").append(palabra).append("* ");
+            }
         }
+        return resultado.toString().trim();
     }
 }
 
+    
 
